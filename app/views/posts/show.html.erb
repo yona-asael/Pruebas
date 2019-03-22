@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<strong>User</strong>
+<%= @user.name %>
+<div class="container">
+
+  <p>
+
+
+
+    <strong>Name:</strong>
+    <%= @post.name %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= @post.description %>
+  </p>
+
+  <p>
+  <img src="<%= @post.image %>">
+  </p>
+
+  <%= link_to 'Edit', edit_post_path(@post) %>
+
+</div>
