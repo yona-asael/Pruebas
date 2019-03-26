@@ -1,0 +1,53 @@
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<div class="container">
+<h3>Blogs Recientes</h3>
+<br>
+<br>
+<div class="row">
+<div class="col-9">
+<hr>
+<%- @post.each do |f|%>
+<div class="media">
+  <img src="<%=f.image %>" class="align-self-center mr-3" width="16%" height="120">
+  <div class="media-body">
+  <h5 class="mt-0"> <a href="#"> <%= f.name %> </a> </h5>
+  <span class="badge badge-primary">Categoria</span>
+  <span class="badge badge-secondary"><%= %></span>
+  <span class="badge badge-info">Votes</span>
+  <span class="badge badge-success"><%=  %></span>
+  <br>
+  <p><%=  truncate( f.description , :length =>80 ) %></p>
+  <%= link_to 'Read More',post_path(f), class:"btn btn-warning btn-sm"   %>
+  <% if (f.user_id == current_user.id) %>
+  <%= link_to 'Edit',edit_post_path(f), class:"btn btn-primary btn-sm"   %>
+  <%= link_to 'Destroy',f, method: :delete, data: {confirm: 'Are you Sure?'} , class:"btn btn-danger btn-sm"  %>
+  <% end %>
+  </div>
+</div>
+<hr>
+<% end %>
+
+</div>
+<div class="col-3">
+  <div class="card my-4">
+    <h5 class="card-header" style="color: black;">Categories</h5>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg-6">
+          <ul class="list-unstyled mb-0">
+            <%-  @cats.each do |f|%>
+          <li>
+            <%= link_to f.name,post_index_path(:idCom => f.id), class:"btn btn-primary btn-sm"   %>
+          </li>
+          <% end %>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  </div>
+
+</div>

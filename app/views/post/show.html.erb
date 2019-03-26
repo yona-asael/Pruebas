@@ -1,0 +1,78 @@
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-12">
+      <h1 class="mt-4"><%= @post.name %></h1>
+      <hr>
+      <hr>
+       <img src=" <%=@post.image %> " class="img-fluid" alt="Responsive image">
+      <hr>
+
+      <p class="lead"><%=@post.description %><p>
+  </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-9">
+  <%- @com.each do |f|  %>
+    <hr>
+      <div class="col-3">
+
+          <h3><%= f.user.name %></h3>
+
+      </div>
+      <div class="col-5">
+        <%= f.description %>
+      </div>
+
+      <% if current_user.id == f.user_id %>
+          <%= link_to 'Destroy',f, method: :delete, data: {confirm: 'Are you Sure?'} , class:"btn btn-danger btn-lg "  %>
+      <% end %>
+
+      <% end %>
+
+    </div>
+
+    <div class="col-3">
+      <div class="card my-4">
+        <h5 class="card-header" style="color: black;">Categories</h5>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-6">
+              <ul class="list-unstyled mb-0">
+                <%-  @cats.each do |f|%>
+              <li>
+                <%= link_to f.name,post_index_path(:idCom => f.id), class:"btn btn-primary btn-sm"   %>
+              </li>
+              <% end %>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      </div>
+  </div>
+  <div class="row">
+
+      <div class="col-9">
+      <%= form_for :comment,url:   '/comment' do |form| %>
+      <%= form.hidden_field :post_id, :value => @post.id %>
+      <div class="form-group">
+        <div class="field">
+          <%= form.label :description %>
+          <%= form.text_area :description, id: :post_name ,class: 'form-control'%>
+        </div>
+      </div>
+      <div class="col-12 forgot">
+        <div class="actions">
+          <%= form.submit %>
+        </div>
+        </div>
+      <% end %>
+      </div>
+  </div>
